@@ -1,0 +1,83 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# ZSH_DISABLE_COMPFIX="true"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/kyle/.oh-my-zsh
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Uncomment the following line to use case-sensitive completion.
+CASE_SENSITIVE="true"
+
+# Disable auto-setting terminal title.
+DISABLE_AUTO_TITLE="true"
+
+# Enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+plugins=(git docker zsh-autosuggestions zsh-output-highlighting zsh-better-npm-completion per-directory-history colorize zsh-syntax-highlighting zsh-recall zsh-nvm bgnotify)
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
+ZSH_COLORIZE_TOOL=chroma
+ZSH_COLORIZE_STYLE="colorful"
+
+source $ZSH/oh-my-zsh.sh
+unset LSCOLORS
+# export CLICOLOR=1
+# export CLICOLOR_FORCE=1
+
+alias love="/Applications/love.app/Contents/MacOS/love"
+alias c="clear"
+alias l='colorls -A --tree=1 --git-status --sd $1'
+alias ase="/Applications/Aseprite.app/Contents/MacOS/aseprite"
+alias icode="code-insiders"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+    nvm use
+  elif [[ $(nvm version) != $(nvm version default) ]]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export PATH="/usr/local/mysql/bin:$PATH"
+export ANDROID_HOME='/Users/kyle/Library/Android/sdk'
+export PATH="$PATH:/Users/kyle/Library/Android/sdk/platform-tools:/Users/kyle/Library/Android/sdk/tools:/Users/kyle/Library/Android/sdk/tools/bin"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home"
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+source /Users/kyle/chromatic-zsh/chromatic-zsh.zsh
+autoload -U compinit && compinit
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select
